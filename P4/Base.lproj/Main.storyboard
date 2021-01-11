@@ -46,9 +46,6 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lMF-bq-9fo">
                                         <rect key="frame" x="100" y="0.0" width="80" height="80"/>
                                         <state key="normal" backgroundImage="Layout 2"/>
-                                        <connections>
-                                            <action selector="Display:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4Ai-lW-H1n"/>
-                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tpH-Mq-qg3">
                                         <rect key="frame" x="200" y="0.0" width="80" height="80"/>
@@ -62,7 +59,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="Et4-Pl-2ry"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Delm-Medium" family="Delm" pointSize="19"/>
+                                <fontDescription key="fontDescription" name="Delm-Medium" family="Delm" pointSize="25"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="heightClass=compact">
@@ -85,11 +82,17 @@
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                         <state key="normal" image="Plus"/>
+                                                        <connections>
+                                                            <action selector="didTapButton" destination="BYZ-38-t0r" eventType="touchUpInside" id="Seq-EE-Mia"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YuM-0h-OM6">
                                                         <rect key="frame" x="129" y="0.0" width="127" height="127"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" image="Plus"/>
+                                                        <connections>
+                                                            <action selector="didTapButton" destination="BYZ-38-t0r" eventType="touchUpInside" id="zxS-TY-pP3"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
@@ -103,11 +106,17 @@
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <color key="titleShadowColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="didTapButton" destination="BYZ-38-t0r" eventType="touchUpInside" id="4lj-Ub-8Ni"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wpt-vv-wRf">
                                                         <rect key="frame" x="129" y="0.0" width="127" height="127"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" image="Plus"/>
+                                                        <connections>
+                                                            <action selector="didTapButton" destination="BYZ-38-t0r" eventType="touchUpInside" id="Pt8-q2-dCm"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
@@ -252,10 +261,10 @@
                         </variation>
                     </view>
                     <connections>
-                        <outlet property="Button1" destination="8rL-og-WNm" id="ffn-yl-hQj"/>
-                        <outlet property="Button2" destination="YuM-0h-OM6" id="oqe-I7-7rb"/>
-                        <outlet property="Button4" destination="wpt-vv-wRf" id="raa-7a-IW0"/>
-                        <outlet property="Choose2" destination="lMF-bq-9fo" id="Bzr-Kj-Yzg"/>
+                        <outlet property="Button1" destination="8rL-og-WNm" id="Rea-dr-Wa7"/>
+                        <outlet property="Button2" destination="YuM-0h-OM6" id="faP-Zp-7Ma"/>
+                        <outlet property="Button3" destination="KGG-1h-yqX" id="3e3-9t-kZe"/>
+                        <outlet property="Button4" destination="wpt-vv-wRf" id="VWv-YC-aQ0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
