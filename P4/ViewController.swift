@@ -12,6 +12,7 @@ class ViewController: UIViewController {
     var currentButton : UIButton!
     let selected = UIImage(named: "Selected.png") as UIImage?
     
+    
     @IBOutlet weak var Button1: UIButton!
     @IBOutlet weak var Button2: UIButton!
     @IBOutlet weak var Button3: UIButton!
@@ -19,13 +20,15 @@ class ViewController: UIViewController {
     @IBOutlet weak var Trame1: UIButton!
     @IBOutlet weak var Trame2: UIButton!
     @IBOutlet weak var Trame3: UIButton!
+    @IBOutlet weak var ImageView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
   
         Button1.isHidden = true
         Trame1.setImage(selected, for: .normal)
-        
+        Trame1.contentVerticalAlignment = .fill
+        Trame1.contentHorizontalAlignment = .fill
         
         let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
         swipeUp.direction = .up
@@ -43,6 +46,8 @@ class ViewController: UIViewController {
             Button3.isHidden = false
             Button4.isHidden = false
             Trame1.setImage(selected, for: .normal)
+            Trame1.contentVerticalAlignment = .fill
+            Trame1.contentHorizontalAlignment = .fill
             Trame2.setImage(nil, for: .normal)
             Trame3.setImage(nil, for: .normal)
         }
@@ -53,6 +58,8 @@ class ViewController: UIViewController {
             Button4.isHidden = true
             Trame1.setImage(nil, for: .normal)
             Trame2.setImage(selected, for: .normal)
+            Trame2.contentVerticalAlignment = .fill
+            Trame2.contentHorizontalAlignment = .fill
             Trame3.setImage(nil, for: .normal)
         }
         if currentButton == Trame3 {
@@ -63,6 +70,8 @@ class ViewController: UIViewController {
             Trame1.setImage(nil, for: .normal)
             Trame2.setImage(nil, for: .normal)
             Trame3.setImage(selected, for: .normal)
+            Trame3.contentVerticalAlignment = .fill
+            Trame3.contentHorizontalAlignment = .fill
         }
     }
 
@@ -130,7 +139,7 @@ extension ViewController : UIImagePickerControllerDelegate, UINavigationControll
 
 //Reste a faire//
 
-//Image Selected a resize sur les boutons
+//Image Selected a resize sur les boutons ---------------------------------------------------------> Check
 //Swipe : faire translater la view en meme temp que le UIActivityViewController apparait
 //alerte icone app 1024x1024
 //compiler les photos pour envoyer a la fonction Share()

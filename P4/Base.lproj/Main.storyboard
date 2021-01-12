@@ -289,6 +289,7 @@
                         <outlet property="Button2" destination="YuM-0h-OM6" id="faP-Zp-7Ma"/>
                         <outlet property="Button3" destination="KGG-1h-yqX" id="3e3-9t-kZe"/>
                         <outlet property="Button4" destination="wpt-vv-wRf" id="VWv-YC-aQ0"/>
+                        <outlet property="ImageView" destination="Zrz-ta-tr5" id="7Nd-B2-XGj"/>
                         <outlet property="Trame1" destination="d5v-wy-Nnt" id="Mg8-vV-Pqr"/>
                         <outlet property="Trame2" destination="lMF-bq-9fo" id="kx9-OP-JAm"/>
                         <outlet property="Trame3" destination="tpH-Mq-qg3" id="Hp6-nA-oKE"/>
