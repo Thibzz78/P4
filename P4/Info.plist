@@ -22,6 +22,8 @@
 	<true/>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Please acces allow.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Save photo to library</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Delm-Medium.otf</string>

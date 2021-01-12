@@ -25,7 +25,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Instagrid" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YgD-tv-F65">
-                                <rect key="frame" x="20" y="10" width="280" height="45.5"/>
+                                <rect key="frame" x="20" y="10" width="280" height="41"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="ThirstySoftRegular" family="Thirsty Soft" pointSize="35"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -67,6 +67,9 @@
                                         <exclude reference="Et4-Pl-2ry"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="Rfd-qv-hPZ" id="31d-0M-1oU"/>
+                                </connections>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zrz-ta-tr5">
                                 <rect key="frame" x="30" y="110" width="260" height="260"/>
@@ -83,7 +86,7 @@
                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                         <state key="normal" image="Plus"/>
                                                         <connections>
-                                                            <action selector="didTapButton" destination="BYZ-38-t0r" eventType="touchUpInside" id="Seq-EE-Mia"/>
+                                                            <action selector="didTapButtonWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jw2-dj-5FD"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YuM-0h-OM6">
@@ -91,7 +94,7 @@
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" image="Plus"/>
                                                         <connections>
-                                                            <action selector="didTapButton" destination="BYZ-38-t0r" eventType="touchUpInside" id="zxS-TY-pP3"/>
+                                                            <action selector="didTapButtonWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="VJT-tB-eM1"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -107,7 +110,7 @@
                                                             <color key="titleShadowColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
                                                         <connections>
-                                                            <action selector="didTapButton" destination="BYZ-38-t0r" eventType="touchUpInside" id="4lj-Ub-8Ni"/>
+                                                            <action selector="didTapButtonWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="d2d-Uc-4tb"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wpt-vv-wRf">
@@ -115,7 +118,7 @@
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" image="Plus"/>
                                                         <connections>
-                                                            <action selector="didTapButton" destination="BYZ-38-t0r" eventType="touchUpInside" id="Pt8-q2-dCm"/>
+                                                            <action selector="didTapButtonWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="sa4-4W-hcN"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -225,13 +228,13 @@
                             <mask key="constraints">
                                 <exclude reference="SlC-n5-0y7"/>
                                 <exclude reference="zVs-5I-VAR"/>
-                                <exclude reference="cEg-P6-zKm"/>
                                 <exclude reference="28x-Hm-9qj"/>
                                 <exclude reference="W4d-EP-yim"/>
                                 <exclude reference="bed-ow-Q1Y"/>
                                 <exclude reference="Cuy-fP-th4"/>
                                 <exclude reference="XLS-RK-zVX"/>
                                 <exclude reference="de9-HN-gFY"/>
+                                <exclude reference="cEg-P6-zKm"/>
                                 <exclude reference="ySL-P4-IVa"/>
                             </mask>
                         </variation>
@@ -242,8 +245,6 @@
                                 <include reference="SlC-n5-0y7"/>
                                 <exclude reference="wAc-e4-zy4"/>
                                 <include reference="zVs-5I-VAR"/>
-                                <include reference="cEg-P6-zKm"/>
-                                <exclude reference="kJy-ww-QFh"/>
                                 <include reference="28x-Hm-9qj"/>
                                 <exclude reference="Rfd-qv-hPZ"/>
                                 <include reference="W4d-EP-yim"/>
@@ -255,6 +256,8 @@
                                 <include reference="XLS-RK-zVX"/>
                                 <include reference="de9-HN-gFY"/>
                                 <exclude reference="iAG-Ch-cae"/>
+                                <include reference="cEg-P6-zKm"/>
+                                <exclude reference="kJy-ww-QFh"/>
                                 <exclude reference="bro-MI-Awr"/>
                                 <include reference="ySL-P4-IVa"/>
                             </mask>
@@ -265,6 +268,7 @@
                         <outlet property="Button2" destination="YuM-0h-OM6" id="faP-Zp-7Ma"/>
                         <outlet property="Button3" destination="KGG-1h-yqX" id="3e3-9t-kZe"/>
                         <outlet property="Button4" destination="wpt-vv-wRf" id="VWv-YC-aQ0"/>
+                        <outlet property="SwipeUp" destination="HYu-EL-8RE" id="TKn-oy-nYv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
