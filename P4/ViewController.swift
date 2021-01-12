@@ -28,13 +28,12 @@ class ViewController: UIViewController {
         Trame1.setImage(selected, for: .normal)
         
         
-    let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
-    swipeUp.direction = .up
-    self.view.addGestureRecognizer(swipeUp)
-    let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
-    swipeLeft.direction = .left
-    self.view.addGestureRecognizer(swipeLeft)
-        
+        let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
+        swipeUp.direction = .up
+        self.view.addGestureRecognizer(swipeUp)
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
+        swipeLeft.direction = .left
+        self.view.addGestureRecognizer(swipeLeft)
     }
     
     @IBAction func trameTapButton(sender : UIButton) {
@@ -66,8 +65,6 @@ class ViewController: UIViewController {
             Trame2.setImage(nil, for: .normal)
             Trame3.setImage(selected, for: .normal)
         }
-        
-        
     }
 
     @IBAction func didTapButton(sender : UIButton) {
