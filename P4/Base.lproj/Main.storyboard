@@ -25,7 +25,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Instagrid" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YgD-tv-F65">
-                                <rect key="frame" x="20" y="10" width="280" height="41"/>
+                                <rect key="frame" x="20" y="10" width="280" height="45.5"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="ThirstySoftRegular" family="Thirsty Soft" pointSize="35"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -42,14 +42,23 @@
                                             <constraint firstAttribute="width" secondItem="d5v-wy-Nnt" secondAttribute="height" multiplier="1:1" id="hsf-uA-hh5"/>
                                         </constraints>
                                         <state key="normal" backgroundImage="Layout 1"/>
+                                        <connections>
+                                            <action selector="trameTapButtonWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="GTb-yD-6pB"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lMF-bq-9fo">
                                         <rect key="frame" x="100" y="0.0" width="80" height="80"/>
                                         <state key="normal" backgroundImage="Layout 2"/>
+                                        <connections>
+                                            <action selector="trameTapButtonWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0vU-tB-Jgl"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tpH-Mq-qg3">
                                         <rect key="frame" x="200" y="0.0" width="80" height="80"/>
                                         <state key="normal" backgroundImage="Layout 3"/>
+                                        <connections>
+                                            <action selector="trameTapButtonWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Slh-io-o2J"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <variation key="heightClass=compact" axis="vertical"/>
@@ -67,9 +76,6 @@
                                         <exclude reference="Et4-Pl-2ry"/>
                                     </mask>
                                 </variation>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="Rfd-qv-hPZ" id="31d-0M-1oU"/>
-                                </connections>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zrz-ta-tr5">
                                 <rect key="frame" x="30" y="110" width="260" height="260"/>
@@ -268,7 +274,9 @@
                         <outlet property="Button2" destination="YuM-0h-OM6" id="faP-Zp-7Ma"/>
                         <outlet property="Button3" destination="KGG-1h-yqX" id="3e3-9t-kZe"/>
                         <outlet property="Button4" destination="wpt-vv-wRf" id="VWv-YC-aQ0"/>
-                        <outlet property="SwipeUp" destination="HYu-EL-8RE" id="TKn-oy-nYv"/>
+                        <outlet property="Trame1" destination="d5v-wy-Nnt" id="Mg8-vV-Pqr"/>
+                        <outlet property="Trame2" destination="lMF-bq-9fo" id="kx9-OP-JAm"/>
+                        <outlet property="Trame3" destination="tpH-Mq-qg3" id="Hp6-nA-oKE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
