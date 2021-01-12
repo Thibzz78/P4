@@ -16,7 +16,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var Button2: UIButton!
     @IBOutlet weak var Button3: UIButton!
     @IBOutlet weak var Button4: UIButton!
-    @IBOutlet weak var SwipeUp: UILabel!
     @IBOutlet weak var Trame1: UIButton!
     @IBOutlet weak var Trame2: UIButton!
     @IBOutlet weak var Trame3: UIButton!
@@ -39,8 +38,8 @@ class ViewController: UIViewController {
     @IBAction func trameTapButton(sender : UIButton) {
         currentButton = sender
         if currentButton == Trame1 {
-            Button1.isHidden = true
-            Button2.isHidden = false
+            Button1.isHidden = false
+            Button2.isHidden = true
             Button3.isHidden = false
             Button4.isHidden = false
             Trame1.setImage(selected, for: .normal)
@@ -78,26 +77,35 @@ class ViewController: UIViewController {
     }
     
     @objc func respondToSwipeGesture(gesture: UIGestureRecognizer) {
+        let position = UIDevice.current.orientation
         if let swipeGesture = gesture as? UISwipeGestureRecognizer {
         
-            
             switch swipeGesture.direction {
             case .up:
-                print("up")
-                if let image = Button1.backgroundImage(for: .normal){
-                let vc = UIActivityViewController(activityItems: [image], applicationActivities: [])
-                present(vc, animated: true)
+                if position == .portrait{
+                    print("up")
+                    if let image = Button1.backgroundImage(for: .normal){
+                    let vc = UIActivityViewController(activityItems: [image], applicationActivities: [])
+                    present(vc, animated: true)
+                    }
+                }else{
+                    break
                 }
             case .left:
-                print("left")
+                if position == .landscapeLeft || position == .landscapeRight{
+                    print("left")
+                    if let image = Button1.backgroundImage(for: .normal){
+                    let vc = UIActivityViewController(activityItems: [image], applicationActivities: [])
+                    present(vc, animated: true)
+                    }
+                }else{
+                    break
+                }
             default:
                 break
             }
         }
-        
     }
-    
-    
 }
 
 extension ViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate{
@@ -116,3 +124,13 @@ extension ViewController : UIImagePickerControllerDelegate, UINavigationControll
             picker.dismiss(animated: true, completion: nil)
         }
 }
+
+
+
+
+//Reste a faire//
+
+//Image Selected a resize sur les boutons
+//Swipe : faire translater la view en meme temp que le UIActivityViewController apparait
+//alerte icone app 1024x1024
+//compiler les photos pour envoyer a la fonction Share()
