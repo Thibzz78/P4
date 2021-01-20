@@ -11,7 +11,8 @@ class ViewController: UIViewController {
     
     var currentButton : UIButton!
     let selected = UIImage(named: "Selected.png") as UIImage?
-    
+    var swipeGesture : UISwipeGestureRecognizer?
+    private var translation = CGAffineTransform()
     
     @IBOutlet weak var Button1: UIButton!
     @IBOutlet weak var Button2: UIButton!
@@ -30,13 +31,26 @@ class ViewController: UIViewController {
         Trame1.contentVerticalAlignment = .fill
         Trame1.contentHorizontalAlignment = .fill
         
-        let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
-        swipeUp.direction = .up
-        self.view.addGestureRecognizer(swipeUp)
-        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
-        swipeLeft.direction = .left
-        self.view.addGestureRecognizer(swipeLeft)
+        swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
+        swipeGesture?.direction = .up
+        self.view.addGestureRecognizer(swipeGesture!)
     }
+    
+/*
+    func showHiddenButtons(bool : isFirstButSh, bool : issecondButSh, bool : isthButSh, bool : isfrButSh ){
+                Button1.isHidden = isFirstButSh
+                Button2.isHidden = issecondButSh
+                Button3.isHidden = isthButSh
+                Button4.isHidden = isfrButSh
+    }
+    
+*/
+    
+    private func viewToImage() -> UIImage? {
+        let renderer = UIGraphicsImageRenderer(size: ImageView.bounds.size)
+        return(renderer.image { context in ImageView.drawHierarchy(in: ImageView.bounds, afterScreenUpdates: true)})
+      }
+    
     
     @IBAction func trameTapButton(sender : UIButton) {
         currentButton = sender
@@ -74,6 +88,12 @@ class ViewController: UIViewController {
             Trame3.contentHorizontalAlignment = .fill
         }
     }
+    
+    
+    
+    
+    
+    
 
     @IBAction func didTapButton(sender : UIButton) {
         currentButton = sender
@@ -85,31 +105,44 @@ class ViewController: UIViewController {
     
     }
     
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        coordinator.animate(alongsideTransition:
+          { (UIViewControllerTransitionCoordinatorContext) -> Void in
+            let position = UIDevice.current.orientation
+            if position == .portrait{
+                self.swipeGesture?.direction = .up
+            }else{
+                self.swipeGesture?.direction = .left
+            }
+            
+          }, completion: { (UIViewControllerTransitionCoordinatorContext) -> Void in
+        })
+        super.viewWillTransition(to: size, with: coordinator)
+      }
+    
+    func animateSwipeToUp(){
+        translation = CGAffineTransform(translationX: 0, y: -ImageView.frame.maxY)
+    }
+    func animateSwipeToLeft(){
+        translation = CGAffineTransform(translationX: -ImageView.frame.maxX, y: 0)
+    }
+    
+    
     @objc func respondToSwipeGesture(gesture: UIGestureRecognizer) {
-        let position = UIDevice.current.orientation
         if let swipeGesture = gesture as? UISwipeGestureRecognizer {
-        
             switch swipeGesture.direction {
             case .up:
-                if position == .portrait{
-                    print("up")
-                    if let image = Button1.backgroundImage(for: .normal){
+                if let image = Button1.image(for: .normal){
+                    animateSwipeToUp()
                     let vc = UIActivityViewController(activityItems: [image], applicationActivities: [])
                     present(vc, animated: true)
                     }
-                }else{
-                    break
-                }
             case .left:
-                if position == .landscapeLeft || position == .landscapeRight{
-                    print("left")
-                    if let image = Button1.backgroundImage(for: .normal){
+                if let image = Button1.image(for: .normal){
+                    animateSwipeToLeft()
                     let vc = UIActivityViewController(activityItems: [image], applicationActivities: [])
                     present(vc, animated: true)
                     }
-                }else{
-                    break
-                }
             default:
                 break
             }
@@ -139,7 +172,7 @@ extension ViewController : UIImagePickerControllerDelegate, UINavigationControll
 
 //Reste a faire//
 
-//Image Selected a resize sur les boutons ---------------------------------------------------------> Check
+
 //Swipe : faire translater la view en meme temp que le UIActivityViewController apparait
 //alerte icone app 1024x1024
 //compiler les photos pour envoyer a la fonction Share()
