@@ -36,64 +36,48 @@ class ViewController: UIViewController {
         self.view.addGestureRecognizer(swipeGesture!)
     }
     
-/*
-    func showHiddenButtons(bool : isFirstButSh, bool : issecondButSh, bool : isthButSh, bool : isfrButSh ){
+    func showHiddenButtons(isFirstButSh : Bool, issecondButSh : Bool, isthButSh : Bool, isfrButSh : Bool){
                 Button1.isHidden = isFirstButSh
                 Button2.isHidden = issecondButSh
                 Button3.isHidden = isthButSh
                 Button4.isHidden = isfrButSh
     }
     
-*/
+    func setTrameImage(trame1 : UIButton, trame2 : UIButton, trame3 : UIButton, selected : UIImage){
+        trame1.setImage(nil, for: .normal)
+        trame2.setImage(nil, for: .normal)
+        trame3.setImage(selected, for: .normal)
+    }
     
-    private func viewToImage() -> UIImage? {
-        let renderer = UIGraphicsImageRenderer(size: ImageView.bounds.size)
-        return(renderer.image { context in ImageView.drawHierarchy(in: ImageView.bounds, afterScreenUpdates: true)})
-      }
-    
+    func viewToImage() -> UIImage {
+         let render = UIGraphicsImageRenderer(bounds: ImageView.bounds)
+         
+         return render.image { context in
+             ImageView.layer.render(in: context.cgContext)
+         }
+     }
     
     @IBAction func trameTapButton(sender : UIButton) {
         currentButton = sender
         if currentButton == Trame1 {
-            Button1.isHidden = false
-            Button2.isHidden = true
-            Button3.isHidden = false
-            Button4.isHidden = false
-            Trame1.setImage(selected, for: .normal)
+            showHiddenButtons(isFirstButSh: false, issecondButSh: true, isthButSh: false, isfrButSh: false)
             Trame1.contentVerticalAlignment = .fill
             Trame1.contentHorizontalAlignment = .fill
-            Trame2.setImage(nil, for: .normal)
-            Trame3.setImage(nil, for: .normal)
+            setTrameImage(trame1 : Trame2, trame2: Trame3, trame3: Trame1, selected: selected!)
         }
         if currentButton == Trame2 {
-            Button1.isHidden = false
-            Button2.isHidden = false
-            Button3.isHidden = false
-            Button4.isHidden = true
-            Trame1.setImage(nil, for: .normal)
-            Trame2.setImage(selected, for: .normal)
+            showHiddenButtons(isFirstButSh: false, issecondButSh: false, isthButSh: false, isfrButSh: true)
             Trame2.contentVerticalAlignment = .fill
             Trame2.contentHorizontalAlignment = .fill
-            Trame3.setImage(nil, for: .normal)
+            setTrameImage(trame1 : Trame1, trame2: Trame3, trame3: Trame2, selected: selected!)
         }
         if currentButton == Trame3 {
-            Button1.isHidden = false
-            Button2.isHidden = false
-            Button3.isHidden = false
-            Button4.isHidden = false
-            Trame1.setImage(nil, for: .normal)
-            Trame2.setImage(nil, for: .normal)
-            Trame3.setImage(selected, for: .normal)
+            showHiddenButtons(isFirstButSh: false, issecondButSh: false, isthButSh: false, isfrButSh: false)
             Trame3.contentVerticalAlignment = .fill
             Trame3.contentHorizontalAlignment = .fill
+            setTrameImage(trame1 : Trame1, trame2: Trame2, trame3: Trame3, selected: selected!)
         }
     }
-    
-    
-    
-    
-    
-    
 
     @IBAction func didTapButton(sender : UIButton) {
         currentButton = sender
@@ -122,27 +106,47 @@ class ViewController: UIViewController {
     
     func animateSwipeToUp(){
         translation = CGAffineTransform(translationX: 0, y: -ImageView.frame.maxY)
+        UIView.animate(withDuration: 0.3, animations: {
+            self.ImageView.transform = self.translation
+        }) { [weak self] success in
+            if success {
+                self?.shareImage()
+            }
+        }
     }
+
     func animateSwipeToLeft(){
         translation = CGAffineTransform(translationX: -ImageView.frame.maxX, y: 0)
+        UIView.animate(withDuration: 0.3, animations: {
+            self.ImageView.transform = self.translation
+        }) { [weak self] success in
+            if success {
+               self?.shareImage()
+            }
+        }
     }
     
+    func shareImage(){
+         let image = viewToImage()
+        let vc = UIActivityViewController(activityItems: [image], applicationActivities: [])
+  
+        vc.completionWithItemsHandler = UIActivityViewController.CompletionWithItemsHandler? { [weak self] activityType, completed, returnedItems, activityError in
+                               
+                   UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.3, delay: 0, options: [.curveEaseIn], animations: {
+                       self?.ImageView?.transform = CGAffineTransform(translationX: 0, y: 0)
+                   }, completion: nil)
+               }
+              present(vc, animated: true)
+    } 
     
     @objc func respondToSwipeGesture(gesture: UIGestureRecognizer) {
         if let swipeGesture = gesture as? UISwipeGestureRecognizer {
             switch swipeGesture.direction {
             case .up:
-                if let image = Button1.image(for: .normal){
                     animateSwipeToUp()
-                    let vc = UIActivityViewController(activityItems: [image], applicationActivities: [])
-                    present(vc, animated: true)
-                    }
             case .left:
-                if let image = Button1.image(for: .normal){
                     animateSwipeToLeft()
-                    let vc = UIActivityViewController(activityItems: [image], applicationActivities: [])
-                    present(vc, animated: true)
-                    }
+                 
             default:
                 break
             }
@@ -167,12 +171,3 @@ extension ViewController : UIImagePickerControllerDelegate, UINavigationControll
         }
 }
 
-
-
-
-//Reste a faire//
-
-
-//Swipe : faire translater la view en meme temp que le UIActivityViewController apparait
-//alerte icone app 1024x1024
-//compiler les photos pour envoyer a la fonction Share()
