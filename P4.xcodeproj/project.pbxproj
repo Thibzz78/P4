@@ -15,6 +15,7 @@
 		80750422259A35FA00CE6B83 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 80750420259A35FA00CE6B83 /* LaunchScreen.storyboard */; };
 		8075042C259A3DB700CE6B83 /* Delm-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8075042B259A3DB700CE6B83 /* Delm-Medium.otf */; };
 		8075042F259A3EDE00CE6B83 /* ThirstySoftRegular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8075042E259A3EDE00CE6B83 /* ThirstySoftRegular.otf */; };
+		8084FCEE25C9573A00689BB5 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8084FCED25C9573A00689BB5 /* Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		80750423259A35FA00CE6B83 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8075042B259A3DB700CE6B83 /* Delm-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Delm-Medium.otf"; sourceTree = "<group>"; };
 		8075042E259A3EDE00CE6B83 /* ThirstySoftRegular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ThirstySoftRegular.otf; sourceTree = "<group>"; };
+		8084FCED25C9573A00689BB5 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,13 +62,13 @@
 		80750414259A35FA00CE6B83 /* P4 */ = {
 			isa = PBXGroup;
 			children = (
+				8084FCEC25C9571E00689BB5 /* View */,
+				8084FCEB25C9571800689BB5 /* Controller */,
+				8084FCEA25C9571000689BB5 /* Extensions */,
 				80750431259A3EFB00CE6B83 /* Fonts */,
 				80750415259A35FA00CE6B83 /* AppDelegate.swift */,
 				80750417259A35FA00CE6B83 /* SceneDelegate.swift */,
-				80750419259A35FA00CE6B83 /* ViewController.swift */,
-				8075041B259A35FA00CE6B83 /* Main.storyboard */,
 				8075041E259A35FA00CE6B83 /* Assets.xcassets */,
-				80750420259A35FA00CE6B83 /* LaunchScreen.storyboard */,
 				80750423259A35FA00CE6B83 /* Info.plist */,
 			);
 			path = P4;
@@ -79,6 +81,31 @@
 				8075042B259A3DB700CE6B83 /* Delm-Medium.otf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		8084FCEA25C9571000689BB5 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				8084FCED25C9573A00689BB5 /* Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		8084FCEB25C9571800689BB5 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				80750419259A35FA00CE6B83 /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		8084FCEC25C9571E00689BB5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8075041B259A35FA00CE6B83 /* Main.storyboard */,
+				80750420259A35FA00CE6B83 /* LaunchScreen.storyboard */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -156,6 +183,7 @@
 				8075041A259A35FA00CE6B83 /* ViewController.swift in Sources */,
 				80750416259A35FA00CE6B83 /* AppDelegate.swift in Sources */,
 				80750418259A35FA00CE6B83 /* SceneDelegate.swift in Sources */,
+				8084FCEE25C9573A00689BB5 /* Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

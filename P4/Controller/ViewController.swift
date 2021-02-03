@@ -14,6 +14,7 @@ class ViewController: UIViewController {
     var swipeGesture : UISwipeGestureRecognizer?
     var canSwipe : Bool = false
     private var translation = CGAffineTransform()
+    var buttonsWithImages = [UIButton]()
     
     @IBOutlet weak var Button1: UIButton!
     @IBOutlet weak var Button2: UIButton!
@@ -27,15 +28,23 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        Button1.isHidden = true
-        Trame1.setImage(selected, for: .normal)
-        Trame1.contentVerticalAlignment = .fill
-        Trame1.contentHorizontalAlignment = .fill
+        setupView()
         
-        swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
-        swipeGesture?.direction = .up
-        self.view.addGestureRecognizer(swipeGesture!)
+        setupGesture()
     }
+    
+    private func setupView(){
+            Button1.isHidden = true
+            Trame1.setImage(selected, for: .normal)
+            Trame1.contentVerticalAlignment = .fill
+            Trame1.contentHorizontalAlignment = .fill
+        }
+    
+    private func setupGesture(){
+            swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
+            swipeGesture?.direction = .up
+            self.view.addGestureRecognizer(swipeGesture!)
+        }
     
     func showHiddenButtons(isFirstButSh : Bool, issecondButSh : Bool, isthButSh : Bool, isfrButSh : Bool){
         Button1.isHidden = isFirstButSh
@@ -50,29 +59,20 @@ class ViewController: UIViewController {
         trame3.setImage(selected, for: .normal)
     }
     
-    func viewToImage() -> UIImage {
-        let render = UIGraphicsImageRenderer(bounds: ImageView.bounds)
-        
-        return render.image { context in
-            ImageView.layer.render(in: context.cgContext)
-        }
-    }
-    
     @IBAction func trameTapButton(sender : UIButton) {
         currentButton = sender
+        
         if currentButton == Trame1 {
-            showHiddenButtons(isFirstButSh: false, issecondButSh: true, isthButSh: false, isfrButSh: false)
+            showHiddenButtons(isFirstButSh: !isFirstButtonHasImage, issecondButSh: isFirstButtonHasImage, isthButSh: false, isfrButSh: false)
             Trame1.contentVerticalAlignment = .fill
             Trame1.contentHorizontalAlignment = .fill
             setTrameImage(trame1 : Trame2, trame2: Trame3, trame3: Trame1, selected: selected!)
-        }
-        if currentButton == Trame2 {
-            showHiddenButtons(isFirstButSh: false, issecondButSh: false, isthButSh: false, isfrButSh: true)
+        }else if currentButton == Trame2 {
+            showHiddenButtons(isFirstButSh: false, issecondButSh: false, isthButSh: !isthButtonHasImage, isfrButSh: isthButtonHasImage)
             Trame2.contentVerticalAlignment = .fill
             Trame2.contentHorizontalAlignment = .fill
             setTrameImage(trame1 : Trame1, trame2: Trame3, trame3: Trame2, selected: selected!)
-        }
-        if currentButton == Trame3 {
+        } else if currentButton == Trame3 {
             showHiddenButtons(isFirstButSh: false, issecondButSh: false, isthButSh: false, isfrButSh: false)
             Trame3.contentVerticalAlignment = .fill
             Trame3.contentHorizontalAlignment = .fill
@@ -92,16 +92,16 @@ class ViewController: UIViewController {
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         coordinator.animate(alongsideTransition:
-                                { (UIViewControllerTransitionCoordinatorContext) -> Void in
-                                    let position = UIDevice.current.orientation
-                                    if position == .portrait{
-                                        self.swipeGesture?.direction = .up
-                                    }else{
-                                        self.swipeGesture?.direction = .left
-                                    }
-                                    
-                                }, completion: { (UIViewControllerTransitionCoordinatorContext) -> Void in
-                                })
+            { (UIViewControllerTransitionCoordinatorContext) -> Void in
+                let position = UIDevice.current.orientation
+                if position == .portrait{
+                    self.swipeGesture?.direction = .up
+                }else{
+                    self.swipeGesture?.direction = .left
+                }
+                
+        }, completion: { (UIViewControllerTransitionCoordinatorContext) -> Void in
+        })
         super.viewWillTransition(to: size, with: coordinator)
     }
     
@@ -128,17 +128,20 @@ class ViewController: UIViewController {
     }
     
     func shareImage(){
-        let image = viewToImage()
-        let vc = UIActivityViewController(activityItems: [image], applicationActivities: [])
         
+        let image = ImageView.viewToImage()
+        
+        let vc = UIActivityViewController(activityItems: [image], applicationActivities: [])
         vc.completionWithItemsHandler = UIActivityViewController.CompletionWithItemsHandler? { [weak self] activityType, completed, returnedItems, activityError in
             
             UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.3, delay: 0, options: [.curveEaseIn], animations: {
                 self?.ImageView?.transform = CGAffineTransform(translationX: 0, y: 0)
+                
             }, completion: nil)
         }
         present(vc, animated: true)
     }
+    
     
     @objc func respondToSwipeGesture(gesture: UIGestureRecognizer) {
         if canSwipe == true {
@@ -148,12 +151,19 @@ class ViewController: UIViewController {
                     animateSwipeToUp()
                 case .left:
                     animateSwipeToLeft()
-                    
                 default:
                     break
                 }
             }
         }
+    }
+    
+    var isFirstButtonHasImage : Bool {
+       return buttonsWithImages.contains(Button1)
+    }
+    
+    var isthButtonHasImage : Bool {
+      return buttonsWithImages.contains(Button3)
     }
 }
 
@@ -165,7 +175,7 @@ extension ViewController : UIImagePickerControllerDelegate, UINavigationControll
             currentButton.setImage(image, for: .normal)
             currentButton.imageView!.contentMode = .scaleAspectFill
             canSwipe = true
-            
+            buttonsWithImages.append(currentButton)
         }
         
         picker.dismiss(animated: true, completion: nil)
@@ -175,4 +185,3 @@ extension ViewController : UIImagePickerControllerDelegate, UINavigationControll
         picker.dismiss(animated: true, completion: nil)
     }
 }
-
